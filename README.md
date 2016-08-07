@@ -646,7 +646,7 @@ correspond to those routes.
 ### Controller CRUD
 
 We can already get a list of all of our books, but lets write the controller
-action that returns a single book.
+action that returns a single book. Add this below your index action:
 
 ```ruby
 def show
@@ -656,7 +656,88 @@ end
 
 Test it out by going to `localhost:3000/books/1`. Did you see a book?
 
+Before we go further we should refactor our controller a bit to make it more
+secure and DRY.
 
+1.  First We're going to set a `before_action` right below where we open up the
+`BooksController` Class with this:
+
+```ruby
+before_action :set_book, only: [:show, :update, :destroy]
+```
+
+This will call the `set_book` method before the `show`, `update`, and `destroy`
+actions
+
+Now we have to create the `set_book` method which will just define the instance
+variable `@book` as the book that corresponds to the dynamic id you passed in,
+in the route:
+
+```ruby
+def set_book
+  @book = Book.find(params[:id])
+end
+```
+
+2. Next we want to create a method that will only allow / permit certain keys
+(from the key/value pairs being passed in from `create` and `update` requests).
+
+```ruby
+def book_params
+  params.require(:book).permit(:title, :author)
+end
+```
+
+This requires a root key of `book` and will permit the client to send a title
+and author as well. *We could also require title/author if desired*
+
+Now that we are secure and we can set a single book, we need to finish our CRUD
+actions with `create`, `update` and `delete`
+
+For `create` let's add:
+
+```ruby
+def create
+  @book = Book.new(book_params)
+
+  if @book.save
+    render json: @book, status: :created, location: @book
+  else
+    render json: @book.errors, status: :unprocessable_entity
+  end
+end
+```
+
+For `update` let's add:
+
+```ruby
+def update
+  if @book.update(book_params)
+    head :no_content
+  else
+    render json: @book.errors, status: :unprocessable_entity
+  end
+end
+```
+
+For `destroy` let's add:
+
+```ruby
+def destroy
+  @book.destroy
+
+  head :no_content
+end
+```
+
+One last thing, our helper methods, like `set_book` and security methods like
+`book_params` shouldn't be public or able to be accessed in any way, so we're
+going to make them private by adding this line right before the final `end` that
+closes our `books_controller`:
+
+```ruby
+private :set_book, :book_params
+```
 
 ## [License](LICENSE)
 
