@@ -438,6 +438,74 @@ The purpose of a controller is to handle requests of some particular type.
 In this case, we want to create a new controller called `BooksController`
 for responding to requests about a resource called 'Books'.
 
+Rails has a number of generator tools
+for creating boilerplate files very quickly.
+To spin up a new controller,
+we can just run `rails g controller books --skip-template-engine`.
+
+This will automatically create a new file in `app/controllers`
+called `books_controller.rb`, with the following content:
+
+```ruby
+class BooksController < ApplicationController
+end
+```
+
+Not all controllers handle CRUD,
+but those that do tend to follow the following convention for their routes
+and controller actions:
+
+| Action  | What It Does                             | HTTP Verb | URL           |
+|:-------:|:----------------------------------------:|:---------:|:-------------:|
+| index   | Return a list of all resource instances. | GET       | `/books`     |
+| create  | Create a new instance of a resource.     | POST      | `/books`     |
+| show    | Return a single instance of a resource.  | GET       | `/books/:id` |
+| update  | Update a single instance of a resource.  | PATCH     | `/books/:id` |
+| destroy | Destroy a single instance of a resource. | DELETE    | `/books/:id` |
+
+Let's add an `index` method to `BooksController`.
+
+```ruby
+class BooksController < ApplicationController
+  def index
+    @books = Book.all
+
+    render json: @books
+  end
+end
+```
+
+## Status Check
+
+Let's navigate to `localhost:3000/books` and see if our error has changed.
+
+Let's check out server and see if our error message has changed.
+
+It seems we have an `uninitialized constant`! This is because we have yet to
+tell rails what a `book` is, it doesn't know how to **model** the data.
+
+## Model
+
+Let's generate a model by entering `rails g model Book title:string author:string`
+
+-  The g stands for generate, Rails does a lot of work for us.
+-  Let's look at what was generated.
+
+## Status Check
+
+Let's navigate to `localhost:3000/books` and see if our error has changed.
+
+Let's check out server and see if our error message has changed.
+
+It seems we have to migrate, let's do that.
+
+## Migrations
+
+Run `rake db:migrate` in the root of this books directory.
+
+
+
+
 
 ## [License](LICENSE)
 
