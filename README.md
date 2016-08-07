@@ -377,7 +377,66 @@ we're getting errors where expected as we build our API.
 -  Now that we have our secrets run `rake db:nuke_pave`.
   - This rake command `nuke_pave` is one of many, this one deletes all database
     instances, creates a new one, and loads starting data (if any).
+-  Quit your server and restart it.
 -  *Did that not work? Are you running a database like postgres?*
+
+## Status Check
+
+-  Navigate to `localhost:3000` in chrome.
+  -  Do you get a `welcome aboard` page?
+  -  Check your server, are there any error messages?
+
+
+## Routing
+
+We're making a library API Right? Let's try checking to see if there are any
+books by navigating to `localhost:3000/books`
+
+You should get an error similar to the following:
+
+```bash
+Routing Error
+No route matches [GET] "/books"
+```
+
+Whoops! We haven't made any routes yet!
+
+As you learned in the previous lesson,
+a route indicates which controller action will be triggered
+when a particular type of HTTP request arrives at a given URL.
+
+In order for our API to respond to GET requests at the `/books` URL,
+we'll need to create a Route that specifies what to do
+when that type of request comes in.
+
+Add the following code to `config/routes.rb`:
+
+```ruby
+get '/books', to: 'books#index'
+```
+
+This tells Rails,
+"When you receive a GET request at the URL path `/books`,
+invoke the `index` method specified in the BooksController class."
+
+## Status Check
+
+We changed a small bit of code, let's see if anything has changed.
+
+-  Navigate to `localhost:3000` in chrome.
+-  It looks like our error has changed to:
+   ```ruby
+    >> uninitialized constant BooksController
+    ```
+
+## Controller
+
+We haven't _defined_ a BooksController class yet,
+so if we try to access `localhost:3000/books`, we'll get another error:
+
+The purpose of a controller is to handle requests of some particular type.
+In this case, we want to create a new controller called `BooksController`
+for responding to requests about a resource called 'Books'.
 
 
 ## [License](LICENSE)
