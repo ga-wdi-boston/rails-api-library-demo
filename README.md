@@ -347,6 +347,37 @@ respective responsibilities of MVC.
 
 Don't worry about `assets`, `serializers`, `mailers`, or `helpers` for now.
 
+# Rails API Demo
+
+This is intended for developers to follow along as I build a library API. You
+may follow along as I code but I will not slow down or share this code. Later
+in this training we will have a code along.
+
+## Preparation
+
+1.  Install dependencies with `bundle install`
+1.  Once dependencies have finished installing open your rails server in another
+terminal tab with `rails server`.
+
+## Status Check
+
+These will be frequent. As developers we want to be meticulous and make sure
+we're getting errors where expected as we build our API.
+
+-  Navigate to `localhost:3000` in chrome.
+  - We should get an internal server error in our browser.
+  - We should also see some error message in your tab that is running our rails server.
+  - __Looks like we're missing secrets. Let's follow the error messages to correct our errors__
+
+## Add Secrets
+
+-  Open `config/secrets.yml`
+-  Follow the instructions in that file to set a **different** key for `development` and `test`.
+-  *Do not touch `production`*
+-  Now that we have our secrets run `rake db:nuke_pave`.
+  - This rake command `nuke_pave` is one of many, this one deletes all database
+    instances, creates a new one, and loads starting data (if any).
+-  *Did that not work? Are you running a database like postgres?*
 
 
 ## [License](LICENSE)
