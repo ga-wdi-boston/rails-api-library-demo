@@ -739,6 +739,63 @@ closes our `books_controller`:
 private :set_book, :book_params
 ```
 
+### Status Check
+
+Test your API by writing the curl request to `create`, `update` and `destroy` a
+book.
+
+`create`
+
+```bash
+curl --include --request POST http://localhost:3000/books \
+  --header "Content-Type: application/json" \
+  --data '{
+    "book": {
+      "title": "Example Title",
+      "author": "Example Author"
+    }
+  }'
+```
+
+`show`
+```bash
+curl --include --request GET http://localhost:3000/books
+```
+
+From these is should not be too difficult to construct an `update` and `destroy`
+request.
+
+### A Note on Best Practices
+
+While it is important that you understand how to write a controller and what
+each part does as mentioned earlier Rails does a fair amount of work for us.
+
+There is a command that will *generate the model, controller and routes for us.*
+It will also create all of the standard crude actions which we wrote by hand.
+This command is `rails g scaffold` to create exactly what we wrote you would
+type `rails g scaffold book title:string author:string`
+
+Different developers have different opinions on using scaffolding, some think
+it's lazy and would rather be sure about everything they are putting into their
+code.  Others think it's the ultimate tool for productivity and prevent bugs,
+errors and typos.
+
+*I would recommend using scaffolding.*
+
+### Migrations
+
+What if we've gotten this far and realized that not only do books have an
+`author` and `title`, but we also want to store some `secret_info`? We don't
+have to start from scratch, we just have to change out model and tell it to
+update the date store accordingly.  We do this with something called a `migration`.
+
+To add another coloumn to our Book model called `secret_info`in the root of this
+directory all you would have to type is:
+
+```bash
+rails g migration AddSecretInfoToBook secret_info:string
+```
+
 ## [License](LICENSE)
 
 Source code distributed under the MIT license. Text and other assets copyright
