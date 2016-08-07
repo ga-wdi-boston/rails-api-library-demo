@@ -503,9 +503,63 @@ It seems we have to migrate, let's do that.
 
 Run `rake db:migrate` in the root of this books directory.
 
+Let's navigate to `localhost:3000/books` and see if our error has changed.
+
+We can see what appears to be JSON, but there are no books! That's because we
+have not added any.
+
+## Active Record
+
+First let's enter our `rails console` so we can make use of our models. This
+lets us interact with Rails from the command line.
+
+We're going to create a single book:
+
+### CRUD: C
+
+```ruby
+book1 = Book.create([{ title: 'Less Funny Than Jason', author: 'Lauren Fazah'}])
+```
+
+and maybe one more...
+
+```ruby
+book2 = Book.create([{ title: 'How I Miss Meat!', author: 'Lauren Fazah'}])
+```
+
+We can even use other methods such as `.new` and `.save`.
+
+Now navigate to `localhost:3000/books` and see if anything has changed.
+
+### CRUD: R
+
+If want to use Active Record for seeing what is in our data store we can do so
+by looking for a speific field.
+
+```ruby
+Book.find_by(author: 'Lauren Fazah')
+# returns the first author
+
+Book.where(author: 'Lauren Fazah')
+# returns all results where author == 'Lauren Fazah'
+
+Book.last
+# returns the last book in the collection
+```
+
+There are more ways to read and organize the data using Active Record. I would
+encourge you to look up more in your off time.
+
+### CRUD: U
+
+If we want to make and update using Active Record 
 
 
 
+If we wanted to use Ajax or curl to create books we would need to do a bit more
+work.
+
+##
 
 ## [License](LICENSE)
 
