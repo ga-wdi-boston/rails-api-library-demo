@@ -590,7 +590,60 @@ will need repeat the process that we used for index.
 *Index is one of the (usually) two controller actions that make up `READ` you*
 *will need another controller action if you want top show just one item*
 
-## Routing the Rest of CRUD
+### Routing the Rest of CRUD
+
+Remeber how when we first tried to display our JSON on `localhost:3000` we had
+to create a route in `config/routes.rb`?
+
+-  This is what in turn triggered the proper controller and controller action.
+-  Which in turn interacted with the model
+-  Which in turn interacted with the database
+-  This cycle then sends information back the way which it came (in this case).
+
+We already did the inital hard work of creating our Books Controller and our
+Book Model. We tok care of the database too, so all we have left to do is:
+
+1.   Add proper routes which trigger the correct controller/controller action
+1.   Add the corresponding controller action
+
+Open `config/routes.rb` and add the following routes below the index route:
+
+```ruby
+post '/books', to: 'books#create'
+# POST request from /books send to the books controller, use the create action
+get '/books/:id', to: 'books#show'
+# GET request from /books send to the books controller, use the show action
+patch '/books/:id', to: 'books#update'
+delete '/books/:id', to: 'books#destroy'
+
+# Note you may see a PUT request out there in the world, for now ignore it.
+```
+
+If you run `rake routes` in the root of this directory you can see a list of
+all your current routes. *A useful debugger tool*
+
+`:id` is a dynamic segment, it tells rails to expect a piece of information
+which goes inside of a *params hash* which will be accessible in the controller.
+
+*Remember how I said Rails does a lot for us*
+
+It's crucial that we use and `:id` dynamic segment otherwise when we make our
+show, patch, and delete requests Rails won't know which item in the data store
+you're referring to.
+
+Developers often find shortcuts for things they have to do repeatedly. A
+shorthand way of writing all the routes listed above is:
+
+```ruby
+resources :books, only: [:index, :show, :create, :update, :destroy]
+# I'm a fan of explicit inclusion, but this could also be written:
+resources :books, except: [:new, :edit]
+```
+
+We have our routes, now it's time to create the controlled actions that
+correspond to those routes.
+
+### Controller CRUD
 
 ## [License](LICENSE)
 
