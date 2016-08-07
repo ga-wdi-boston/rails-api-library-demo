@@ -527,6 +527,12 @@ and maybe one more...
 book2 = Book.create([{ title: 'How I Miss Meat!', author: 'Lauren Fazah'}])
 ```
 
+We'll be nice to Lauren and add just one extra book:
+
+```ruby
+book3 = Book.create([{ title: 'Lauren is on fleek', author: 'Jason Weeks'}])
+```
+
 We can even use other methods such as `.new` and `.save`.
 
 Now navigate to `localhost:3000/books` and see if anything has changed.
@@ -547,19 +553,44 @@ Book.last
 # returns the last book in the collection
 ```
 
+Now navigate to `localhost:3000/books` and see if anything has changed.
+
 There are more ways to read and organize the data using Active Record. I would
 encourge you to look up more in your off time.
 
 ### CRUD: U
 
-If we want to make and update using Active Record 
+Let's update one of our books using Active record
 
+```ruby
+book = Book.find_by(title: 'Less Funny Than Jason')
+book.update(title: 'Less overall cool factor than Jason: The Sequel')
 
+# You could also string this together
+Book.find_by(title: 'Less overall cool factor than Jason: The Sequel').update(title: 'JASON IS AWESOME THE TRILOGY')
+```
 
-If we wanted to use Ajax or curl to create books we would need to do a bit more
-work.
+Now navigate to `localhost:3000/books` and see if anything has changed.
 
-##
+### CRUD: D
+
+Finally, if we want to remove a book with Active Record we simply do:
+
+```ruby
+Book.find_by(author: 'Jason Weeks').destroy
+```
+
+Now navigate to `localhost:3000/books` and see if anything has changed.
+
+### What about Curl and Ajax
+
+If we wanted to use Ajax or curl to `create`, `read`, `update` or `destroy` we
+will need repeat the process that we used for index.
+
+*Index is one of the (usually) two controller actions that make up `READ` you*
+*will need another controller action if you want top show just one item*
+
+## Routing the Rest of CRUD
 
 ## [License](LICENSE)
 
