@@ -645,6 +645,19 @@ correspond to those routes.
 
 ### Controller CRUD
 
+We can already get a list of all of our books, but lets write the controller
+action that returns a single book.
+
+```ruby
+def show
+  render json: Book.find(params[:id])
+end
+```
+
+Test it out by going to `localhost:3000/books/1`. Did you see a book?
+
+
+
 ## [License](LICENSE)
 
 Source code distributed under the MIT license. Text and other assets copyright
