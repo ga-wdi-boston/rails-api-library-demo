@@ -23,10 +23,9 @@ application.
 1.  [Fork and clone](https://github.com/ga-wdi-boston/meta/wiki/ForkAndClone)
     this repository.
 1.  Create a new branch, `training`, for your work.
+2.  **DO NOT INSTALL DEPENDENCIES**
 
 ## Dependencies
-
-Install with `bundle install`.
 
 -   [`rails-api`](https://github.com/rails-api/rails-api)
 -   [`rails`](https://github.com/rails/rails)
