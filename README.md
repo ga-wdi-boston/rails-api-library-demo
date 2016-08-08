@@ -168,10 +168,8 @@ named David Heinemeier Hannson (also known as 'DHH'). Although Rails
 applications don't match up perfectly with the abstract idea of MVC, their
 architecture is fairly similar.
 
-Let's take a look at an actual Rails app and see how it lines up. Fork and clone
-[this repo](https://github.com/ga-wdi-boston/rails-tic-tac-toe-api). Recognize
-it? It's your Tic Tac Toe back-end from Project 1! Now open it up in Atom - you
-should see a file structure like this:
+Let's take a look at an actual Rails app and see how it lines up.  Take a look
+at the file structure of the tic-tac-toe API your used for Project 1.
 
 ```bash
 .
