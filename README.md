@@ -659,7 +659,7 @@ Test it out by going to `localhost:3000/books/1`. Did you see a book?
 Before we go further we should refactor our controller a bit to make it more
 secure and DRY.
 
-1.  First We're going to set a `before_action` right below where we open up the
+1. First We're going to set a `before_action` right below where we open up the
 `BooksController` Class with this:
 
 ```ruby
@@ -795,6 +795,42 @@ directory all you would have to type is:
 ```bash
 rails g migration AddSecretInfoToBook secret_info:string
 ```
+
+The previous command created a migration, which tells the model how to update
+the data store.
+
+The following command tells the model to use the migration create and updates
+the data session_store
+
+```bash
+rake db:migrate
+```
+
+Check `localhost:3000/books`, did anything change?
+
+### Serializers
+
+Let's say that secret info was something that was useful for us, like a password
+or SSN or something valuable. We don't want to let anyone who makes a `GET`
+request to see that valuable info. That's what serializers are for.
+
+It's easy to think of them as JSON formatters. They control what information can
+is sent to the client.
+
+Generate a serializer with `rails g serializer book`
+
+Check `localhost:3000/books`, did anything change?
+
+Let's add some attributes that we want to allow the client to see in
+`serializers/book_serializer.rb`
+
+```ruby
+attributes :id, :author, :title
+```
+
+### Congrats
+
+You just created your first API.
 
 ## [License](LICENSE)
 
