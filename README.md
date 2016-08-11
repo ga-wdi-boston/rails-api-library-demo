@@ -84,6 +84,94 @@ class CreateLoans < ActiveRecord::Migration
 end
 ```
 
+So our `Loan` table now has the following columns: ID, author_id, book_id, Date.
+
+Let's run our migration with `rake db:migrate`
+
+Let's take a peek at our database and see how this table looks. Simply type:
+
+```bash
+rails db
+```
+
+If your prompt looks like this `rails-api-library-demo_development=#` type:
+
+```bash
+\d loans
+```
+
+You will be able to see all the columns contained in the `loan` table.
+
+## Through: Associated Records
+
+While we can see that in the `loan` model some some code was added for us:
+
+```ruby
+class Loan < ActiveRecord::Base
+  belongs_to :author
+  belongs_to :book
+end
+```
+
+But we need to go into our models (`author`, `book`, and `loan`) and add some
+more code to finish creating our associations.
+
+Let's go ahead and add that code starting with the `book` model:
+
+```ruby
+# Book Model
+class Book < ActiveRecord::Base
+  has_many :books, through: :loans
+  has_many :loans
+end
+```
+
+In our author model we will do something similar:
+
+```ruby
+# Author Model
+class Author < ActiveRecord::Base
+  has_many :books, through: :loans
+  has_many :loans
+end
+```
+
+Finally in our `loan` model we're going to update it to:
+
+```ruby
+class Loan < ActiveRecord::Base
+  belongs_to :author, inverse_of: :loans
+  belongs_to :book, inverse_of: :loans
+end
+```
+
+What is `inverse_of` and why do we need it?
+
+When you create a `bi-directional` (two way) association, ActiveRecord does not
+necessarily know about that relationship.
+
+*I say necessarily because in future versions of Rails this is/may be resolved*
+
+Without `inverse_of` you can get some strange behavior like this:
+
+```ruby
+a = Author.first
+b = a.books.first
+a.first_name == b.author.first_name # => true
+a.first_name = 'Lauren'
+a.first_name == b.author.first_name # => false
+```
+
+Rails will store `a` and `b.author` in different places in memory, not knowing to
+change one when you change the other. `inverse_of` informs Rails of the
+relationship, so you don't have inconsistancies in your data.
+
+*For more info on this please read the [Rails Guides](http://guides.rubyonrails.org/association_basics.html)*
+
+## Adding Via ActiveRecord
+
+
+
 ## [License](LICENSE)
 
 Source code distributed under the MIT license. Text and other assets copyright
