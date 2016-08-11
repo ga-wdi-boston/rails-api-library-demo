@@ -4,8 +4,6 @@ class CreateLoans < ActiveRecord::Migration
       t.references :author, index: true, foreign_key: true
       t.references :book, index: true, foreign_key: true
       t.datetime :date
-
-      t.timestamps null: false
     end
   end
 end
