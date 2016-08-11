@@ -170,6 +170,8 @@ relationship, so you don't have inconsistancies in your data.
 
 ## Adding Via ActiveRecord
 
+First, let's open our Rails console with `rails console`
+
 
 
 ## [License](LICENSE)
