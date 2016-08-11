@@ -168,7 +168,41 @@ relationship, so you don't have inconsistancies in your data.
 
 *For more info on this please read the [Rails Guides](http://guides.rubyonrails.org/association_basics.html)*
 
+## Removing a Column
+
+But wait! We forgot an important step! Yesterday we added an `author_id` column
+to `books`. Let's remove that before we go any further and our API performs in
+a way we don't expect.
+
+We need to create a migration to remove that column, from the Rails Guides:
+
+```markdown
+If the migration name is of the form "AddXXXToYYY" or "RemoveXXXFromYYY" and is
+followed by a list of column names and types then a migration containing the
+appropriate add_column and remove_column statements will be created.
+```
+
+Knowing this we can construct a migration that removes this column for us:
+
+```bash
+rails g migration RemoveAuthorIdFromBooks author_id:integer
+```
+
+and this creates the following migration:
+
+```ruby
+class RemoveAuthorIdFromBooks < ActiveRecord::Migration
+  def change
+    remove_column :books, :author_id, :integer
+  end
+end
+```
+
+Now let's run this migration with `rake db:migrate` and we should be good to go.
+
 ## Adding Via ActiveRecord
+
+
 
 First, let's open our Rails console with `rails console`
 
