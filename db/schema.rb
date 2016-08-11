@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20160809154101) do
 
   create_table "books", force: :cascade do |t|
     t.string   "title"
-    t.string   "author"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.string   "secret_info"
@@ -42,22 +41,6 @@ ActiveRecord::Schema.define(version: 20160809154101) do
   end
 
   add_index "examples", ["user_id"], name: "index_examples_on_user_id", using: :btree
-
-  create_table "ingredients", force: :cascade do |t|
-    t.string   "name"
-    t.string   "unit"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "patients", force: :cascade do |t|
-    t.string   "given_name"
-    t.string   "surname"
-    t.string   "born_on"
-    t.string   "gender"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           null: false
