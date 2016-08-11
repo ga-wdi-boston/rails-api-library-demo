@@ -87,7 +87,10 @@ class RemoveAuthorIdFromBooks < ActiveRecord::Migration
 end
 ```
 
-Now let's run this migration with `rake db:migrate` and we should be good to go.
+Now let's run this migration with `rake db:migrate`.  Is there anything else
+that I could be forgetting? That may cause errors later?
+
+<!-- Remove author_id from book Serializer -->
 
 ## Making a Join Table
 
@@ -153,7 +156,7 @@ Let's go ahead and add that code starting with the `book` model:
 ```ruby
 # Book Model
 class Book < ActiveRecord::Base
-  has_many :books, through: :loans
+  has_many :authors, through: :loans
   has_many :loans
 end
 ```
@@ -218,9 +221,32 @@ author1 = Author.create([{ given_name: 'Lauren', surname: 'Fazah'}])
 author2 = Author.create([{ given_name: 'Jason', surname: 'Weeks'}])
 author3 = Author.create([{ given_name: 'Antony', surname: 'Donovan'}])
 ```
-Close the rails console and check `localhost:3000/books` and
-`localhost:3000/authors` to see if we have created books and authors.
+Check `localhost:3000/books` and `localhost:3000/authors` to see if we have
+created books and authors.
 
+## Updating Serializers
+
+Now that we can see some data it's time to update our serializers or these
+relationships will not be as useful as they can.
+
+Let's add the author attribute to our attributes list in our `book` serializer.
+
+Our finished serializer should look like this:
+
+```ruby
+class BookSerializer < ActiveModel::Serializer
+  attributes :id, :title, :authors
+end
+```
+
+Let's do the same in our `author` serializer, it should look like this once,
+we're done.
+
+```ruby
+class AuthorSerializer < ActiveModel::Serializer
+  attributes :id, :surname, :given_name, :books
+end
+```
 
 
 

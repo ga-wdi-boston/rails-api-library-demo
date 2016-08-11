@@ -1,4 +1,4 @@
-# Author Model
 class Author < ActiveRecord::Base
-  has_many :books
+  has_many :books, through: :loans
+  has_many :loans
 end
