@@ -51,7 +51,38 @@ Let's see what this table might look like:
 
 In the above example the `appointments` table is the `join table`. You can see
 it has both a `physician_id` column and a `patient_id` column.  Both of these
-columns store refrences to their respective tables
+columns store refrences to their respective tables.
+
+You can also see a column called `appointment_date`. You are allowed to add
+other columns on to your `join table`, but do not necessarily have to.  In this
+case it makes sense, in some cases it may not, use your judgement.
+
+## Making a Join Table
+
+We're going to use the generators that Rails provides to generate a `loan` model
+along with a `loan` migration that includes references to both `author` and
+`book`.
+
+```ruby
+rails g scaffold loan author:references book:references date:datetime
+```
+
+Along with creating a `loan` model, controller, routes, and serializer, Rails
+will create this migration:
+
+```ruby
+class CreateLoans < ActiveRecord::Migration
+  def change
+    create_table :loans do |t|
+      t.references :author, index: true, foreign_key: true
+      t.references :book, index: true, foreign_key: true
+      t.datetime :date
+
+      t.timestamps null: false
+    end
+  end
+end
+```
 
 ## [License](LICENSE)
 
