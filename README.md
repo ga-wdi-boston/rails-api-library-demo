@@ -248,9 +248,54 @@ class AuthorSerializer < ActiveModel::Serializer
 end
 ```
 
+## Test Using Curl
 
+Now, let's test this using curl. To connect `books` and `authors` we are going
+to post to the join table:
 
+```bash
+curl --include --request POST http://localhost:3000/loans \
+  --header "Content-Type: application/json" \
+  --data '{
+    "loan": {
+      "author_id": "2",
+      "book_id": "2"
+    }
+  }'
+```
 
+Using this curl request as your basis `Create`, `Read` and `Update` the loans
+table. *DO NOT DELETE*
+
+## Dependent Destroy
+
+Say we wanted to delete a book or an author. If we delete one we proably want to
+delete the association with the other.  Rails helps us with this with a method
+called `depend destroy`.  Let's edit our `book` and `author` model to inclde it
+so when we delete one, reference to the other gets deleted as well.
+
+Let's update our models to look like the following:
+
+```ruby
+# Book Model
+class Book < ActiveRecord::Base
+  has_many :authors, through: :loans
+  has_many :loans, dependent: :destroy
+end
+```
+
+```ruby
+class Author < ActiveRecord::Base
+  has_many :books, through: :loans
+  has_many :loans, dependent: :destroy
+end
+```
+
+Test this out by using curl request to construct relationships then remove them.
+
+```bash
+curl --include --request DELETE http://localhost:3000/authors/2
+```
 
 ## [License](LICENSE)
 
