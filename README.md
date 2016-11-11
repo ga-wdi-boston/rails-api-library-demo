@@ -60,8 +60,8 @@ we're getting errors where expected as we build our API.
 -  Open `config/secrets.yml`
 -  Follow the instructions in that file to set a **different** key for `development` and `test`.
 -  *Do not touch `production`*
--  Now that we have our secrets run `rake db:nuke_pave`.
-  - This rake command `nuke_pave` is one of many, this one deletes all database
+-  Now that we have our secrets run `bundle exec rake db:nuke_pave`.
+  - This bundle exec rake command `nuke_pave` is one of many, this one deletes all database
     instances, creates a new one, and loads starting data (if any).
 -  Quit your server and restart it.
 -  *Did that not work? Are you running a database like postgres?*
@@ -186,7 +186,7 @@ It seems we have to migrate, let's do that.
 
 ## Migrations
 
-Run `rake db:migrate` in the root of this books directory.
+Run `bundle exec rake db:migrate` in the root of this books directory.
 
 Let's navigate to `localhost:4741/books` and see if our error has changed.
 
@@ -305,7 +305,7 @@ delete '/books/:id', to: 'books#destroy'
 # Note you may see a PUT request out there in the world, for now ignore it.
 ```
 
-If you run `rake routes` in the root of this directory you can see a list of
+If you run `bundle exec rake routes` in the root of this directory you can see a list of
 all your current routes. *A useful debugger tool*
 
 `:id` is a dynamic segment, it tells rails to expect a piece of information
@@ -489,7 +489,7 @@ The following command tells the model to use the migration create and updates
 the data session_store
 
 ```bash
-rake db:migrate
+bundle exec rake db:migrate
 ```
 
 Check `localhost:4741/books`, did anything change?
