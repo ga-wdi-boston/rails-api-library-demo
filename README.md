@@ -238,8 +238,6 @@ Book.last
 # returns the last book in the collection
 ```
 
-Now navigate to `localhost:4741/books` and see if anything has changed.
-
 There are more ways to read and organize the data using Active Record. I would
 encourge you to look up more in your off time.
 
@@ -264,6 +262,9 @@ Finally, if we want to remove a book with Active Record we simply do:
 ```ruby
 Book.find_by(author: 'Jason Weeks').destroy
 ```
+
+Note: `find_by` will only destroy *one* book. If we want to destroy *all* the
+ books by Jason, we have to use `where`.
 
 Now navigate to `localhost:4741/books` and see if anything has changed.
 
