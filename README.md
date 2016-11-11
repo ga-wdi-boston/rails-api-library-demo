@@ -60,9 +60,9 @@ we're getting errors where expected as we build our API.
 -  Open `config/secrets.yml`
 -  Follow the instructions in that file to set a **different** key for `development` and `test`.
 -  *Do not touch `production`*
--  Now that we have our secrets run `bundle exec rake db:nuke_pave`.
-  - This bundle exec rake command `nuke_pave` is one of many, this one deletes all database
-    instances, creates a new one, and loads starting data (if any).
+-  Now that we have our secrets run `bundle exec rake db:drop db:create db:migrate`.
+  - These rake commands one delete all database instances, creates a new one,
+    and loads starting data (if any).
 -  Quit your server and restart it.
 -  *Did that not work? Are you running a database like postgres?*
 
