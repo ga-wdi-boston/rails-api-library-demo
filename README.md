@@ -50,7 +50,7 @@ terminal tab with `rails server`.
 These will be frequent. As developers we want to be meticulous and make sure
 we're getting errors where expected as we build our API.
 
--  Navigate to `localhost:3000` in chrome.
+-  Navigate to `localhost:4741` in chrome.
   - We should get an internal server error in our browser.
   - We should also see some error message in your tab that is running our rails server.
   - __Looks like we're missing secrets. Let's follow the error messages to correct our errors__
@@ -68,14 +68,14 @@ we're getting errors where expected as we build our API.
 
 ## Status Check
 
--  Navigate to `localhost:3000` in chrome.
+-  Navigate to `localhost:4741` in chrome.
   -  Do you get a `welcome aboard` page?
   -  Check your server, are there any error messages?
 
 ## Routing
 
 We're making a library API Right? Let's try checking to see if there are any
-books by navigating to `localhost:3000/books`
+books by navigating to `localhost:4741/books`
 
 You should get an error similar to the following:
 
@@ -108,7 +108,7 @@ invoke the `index` method specified in the BooksController class."
 
 We changed a small bit of code, let's see if anything has changed.
 
--  Navigate to `localhost:3000` in chrome.
+-  Navigate to `localhost:4741` in chrome.
 -  It looks like our error has changed to:
    ```ruby
     >> uninitialized constant BooksController
@@ -117,7 +117,7 @@ We changed a small bit of code, let's see if anything has changed.
 ## Controller
 
 We haven't _defined_ a BooksController class yet,
-so if we try to access `localhost:3000/books`, we'll get another error:
+so if we try to access `localhost:4741/books`, we'll get another error:
 
 The purpose of a controller is to handle requests of some particular type.
 In this case, we want to create a new controller called `BooksController`
@@ -162,7 +162,7 @@ end
 
 ## Status Check
 
-Let's navigate to `localhost:3000/books` and see if our error has changed.
+Let's navigate to `localhost:4741/books` and see if our error has changed.
 
 Let's check out server and see if our error message has changed.
 
@@ -178,7 +178,7 @@ Let's generate a model by entering `rails g model Book title:string author:strin
 
 ## Status Check
 
-Let's navigate to `localhost:3000/books` and see if our error has changed.
+Let's navigate to `localhost:4741/books` and see if our error has changed.
 
 Let's check out server and see if our error message has changed.
 
@@ -188,7 +188,7 @@ It seems we have to migrate, let's do that.
 
 Run `rake db:migrate` in the root of this books directory.
 
-Let's navigate to `localhost:3000/books` and see if our error has changed.
+Let's navigate to `localhost:4741/books` and see if our error has changed.
 
 We can see what appears to be JSON, but there are no books! That's because we
 have not added any.
@@ -220,7 +220,7 @@ book3 = Book.create([{ title: 'Lauren is on fleek', author: 'Jason Weeks'}])
 
 We can even use other methods such as `.new` and `.save`.
 
-Now navigate to `localhost:3000/books` and see if anything has changed.
+Now navigate to `localhost:4741/books` and see if anything has changed.
 
 ### CRUD: R
 
@@ -238,7 +238,7 @@ Book.last
 # returns the last book in the collection
 ```
 
-Now navigate to `localhost:3000/books` and see if anything has changed.
+Now navigate to `localhost:4741/books` and see if anything has changed.
 
 There are more ways to read and organize the data using Active Record. I would
 encourge you to look up more in your off time.
@@ -255,7 +255,7 @@ book.update(title: 'Less overall cool factor than Jason: The Sequel')
 Book.find_by(title: 'Less overall cool factor than Jason: The Sequel').update(title: 'JASON IS AWESOME THE TRILOGY')
 ```
 
-Now navigate to `localhost:3000/books` and see if anything has changed.
+Now navigate to `localhost:4741/books` and see if anything has changed.
 
 ### CRUD: D
 
@@ -265,7 +265,7 @@ Finally, if we want to remove a book with Active Record we simply do:
 Book.find_by(author: 'Jason Weeks').destroy
 ```
 
-Now navigate to `localhost:3000/books` and see if anything has changed.
+Now navigate to `localhost:4741/books` and see if anything has changed.
 
 ### What about Curl and Ajax
 
@@ -277,7 +277,7 @@ will need repeat the process that we used for index.
 
 ### Routing the Rest of CRUD
 
-Remeber how when we first tried to display our JSON on `localhost:3000` we had
+Remeber how when we first tried to display our JSON on `localhost:4741` we had
 to create a route in `config/routes.rb`?
 
 -  This is what in turn triggered the proper controller and controller action.
@@ -339,7 +339,7 @@ def show
 end
 ```
 
-Test it out by going to `localhost:3000/books/1`. Did you see a book?
+Test it out by going to `localhost:4741/books/1`. Did you see a book?
 
 Before we go further we should refactor our controller a bit to make it more
 secure and DRY.
@@ -432,7 +432,7 @@ book.
 `create`
 
 ```bash
-curl --include --request POST http://localhost:3000/books \
+curl --include --request POST http://localhost:4741/books \
   --header "Content-Type: application/json" \
   --data '{
     "book": {
@@ -444,7 +444,7 @@ curl --include --request POST http://localhost:3000/books \
 
 `show`
 ```bash
-curl --include --request GET http://localhost:3000/books
+curl --include --request GET http://localhost:4741/books
 ```
 
 From these is should not be too difficult to construct an `update` and `destroy`
@@ -491,7 +491,7 @@ the data session_store
 rake db:migrate
 ```
 
-Check `localhost:3000/books`, did anything change?
+Check `localhost:4741/books`, did anything change?
 
 ### Serializers
 
@@ -504,7 +504,7 @@ is sent to the client.
 
 Generate a serializer with `rails g serializer book`
 
-Check `localhost:3000/books`, did anything change?
+Check `localhost:4741/books`, did anything change?
 
 Let's add some attributes that we want to allow the client to see in
 `serializers/book_serializer.rb`
