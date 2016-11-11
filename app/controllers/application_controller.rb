@@ -1,4 +1,5 @@
-# Base for all API controllers.
+# Do not inherit from this class unless you know what you're doing
+# See ProtectedController and OpenReadController
 class ApplicationController < ActionController::API
   # Force to wants JSON for API
   before_action :api_request_settings
@@ -6,7 +7,7 @@ class ApplicationController < ActionController::API
     request.format = :json
   end
 
-  AUTH_BLOCK = proc do |signed_token, _opts|
+  AUTH_PROC = proc do |signed_token, _opts|
     token = begin
       Rails.application.message_verifier(:signed_token).verify(signed_token)
     rescue ActiveSupport::MessageVerifier::InvalidSignature
@@ -19,7 +20,7 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token::ControllerMethods
   def authenticate
     @current_user =
-      authenticate_or_request_with_http_token(&AUTH_BLOCK)
+      authenticate_or_request_with_http_token(&AUTH_PROC)
   end
 
   # call from actions to get authenticated user (or nil)
@@ -29,7 +30,7 @@ class ApplicationController < ActionController::API
   def set_current_user
     # for access to authenticate method
     t = ActionController::HttpAuthentication::Token
-    @current_user = t.authenticate(self, &AUTH_BLOCK)
+    @current_user = t.authenticate(self, &AUTH_PROC)
   end
 
   # Require SSL for deployed applications
