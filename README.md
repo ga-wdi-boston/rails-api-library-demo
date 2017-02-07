@@ -2,6 +2,39 @@
 
 # Rails API: Library API (Demo)
 
+This is part of the Rails API sequence of talks. Each talk has its own
+repository with a reference README.
+
+-   [Rails API: Single Resource](https://github.com/ga-wdi-boston/rails-api-single-resource)
+-   [Rails API: One-to-Many](https://github.com/ga-wdi-boston/rails-api-one-to-many)
+-   [Rails API: Many-to-Many](https://github.com/ga-wdi-boston/rails-api-many-to-many)
+
+Each talk is designed to walk through the creation of a real Rails API,
+feature-by-feature, using "error driven development". Developers should have
+completed the introductory [Rails
+API](https://github.com/ga-wdi-boston/rails-api) talk. This sequence ends with
+[Rails API: Behavior-Driven
+Development](https://github.com/ga-wdi-boston/rails-api-bdd), where
+error-driven-development is replaced by automated testing.
+
+Each talk covers three domains, and therefore, three APIs. The demonstration
+API, developed by consultants, is followed by a code-along API, in which
+developers and consultants work together to build the API. Finally, developers
+are expected to build their own API as part of the laboratory portions of each
+talk.
+
+-   [Library API](https://github.com/ga-wdi-boston/rails-api-library-demo)
+-   [Clinic API](https://github.com/ga-wdi-boston/rails-api-clinic-code-along)
+-   [Cookbook API](https://github.com/ga-wdi-boston/rails-api-cookbook-lab)
+
+These API repositories contain a few important branches:
+
+-   `master` contains starter code.
+-   `solution` contains a feature-complete reference API. History is not
+    canonical.
+-   `tutorial` contains detailed commit history, and tags for where each talk
+    should end.
+
 ## Preparation
 
 1.  Fork and clone this repository. ([FAQ](https://github.com/ga-wdi-boston-attic/rails-api-library-demo))
