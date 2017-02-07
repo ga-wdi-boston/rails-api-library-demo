@@ -41,6 +41,27 @@ These API repositories contain a few important branches:
 1.  Create a new branch, `training`, for your work.
 1.  Checkout to the `training` branch.
 1.  Install dependencies with `bundle install`.
+1.  Create a `.env` for sensitive settings (`touch .env`).
+1.  Generate new `development` and `test` secrets (`bin/rake secret`).
+1.  Store them in `.env` with keys `SECRET_KEY_BASE_<DEVELOPMENT|TEST>`
+    respectively.
+1.  Setup your database with `bin/rake [db:drop] db:create db:migrate db:seed
+    db:examples`.
+1.  Run the API server with `bin/rails server`.
+
+## Tasks
+
+Developers should run these often!
+
+-   `bin/rake routes` lists the endpoints available in your API.
+-   `bin/rake test` runs automated tests.
+-   `bin/rails console` opens a REPL that pre-loads the API.
+-   `bin/rails db` opens your database client and loads the correct database.
+-   `bin/rails server` starts the API.
+-   `scripts/*.sh` run various `curl` commands to test the API. See below.
+
+<!-- TODO -   `rake nag` checks your code style. -->
+<!-- TODO -   `rake lint` checks your code for syntax errors. -->
 
 ## [License](LICENSE)
 
