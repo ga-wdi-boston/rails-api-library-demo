@@ -37,7 +37,7 @@ These API repositories contain a few important branches:
 
 ## Preparation
 
-1.  Fork and clone this repository. ([FAQ](https://github.com/ga-wdi-boston-attic/rails-api-library-demo))
+1.  Fork and clone this repository.
 1.  Create a new branch, `training`, for your work.
 1.  Checkout to the `training` branch.
 1.  Install dependencies with `bundle install`.
