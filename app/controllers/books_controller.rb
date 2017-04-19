@@ -1,4 +1,6 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: [:show, :update]
+
   def index
     @books = Book.all
 
@@ -6,7 +8,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    render json: Book.find(params[:id])
+    render json: @book
   end
 
   def create
@@ -19,9 +21,23 @@ class BooksController < ApplicationController
     end
   end
 
+  def update
+    @book = Book.find(params[:id])
+
+    if @book.update(book_params)
+      head :no_content
+    else
+      render json: @book.errors, status: :unprocessable_entity
+    end
+  end
+
   def book_params
     params.require(:book).permit(:title, :author)
   end
 
-  private :book_params
+  def set_book
+    @book = Book.find(params[:id])
+  end
+
+  private :book_params, :set_book
 end
