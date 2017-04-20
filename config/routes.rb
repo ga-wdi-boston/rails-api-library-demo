@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :show]
   resources :examples, except: [:new, :edit]
   resources :books, except: [:new, :edit]
+  resources :authors, except: [:new, :edit]
 end

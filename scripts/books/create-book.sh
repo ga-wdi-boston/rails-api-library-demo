@@ -6,3 +6,13 @@ curl --include --request POST http://localhost:4741/books \
       "author": "Example Author"
     }
   }'
+
+
+  curl --include --request POST http://localhost:4741/authors \
+    --header "Content-Type: application/json" \
+    --data '{
+      "authors": {
+        "given_name": "Patrick",
+        "family_name": "Butcher"
+      }
+    }'
