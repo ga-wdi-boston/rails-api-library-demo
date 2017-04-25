@@ -3,6 +3,12 @@
 class LoansController < ApplicationController
   before_action :set_loan, only: [:update, :destroy]
 
+  def index
+    @loans = Loan.all
+
+    render json: @loans
+  end
+
   def create
     @loan = Loan.new(loan_params)
 

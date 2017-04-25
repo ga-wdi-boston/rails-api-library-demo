@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 Rails.application.routes.draw do
-  resources :loans, only: [:create, :update, :destroy]
+  resources :loans, only: [:create, :index, :update, :destroy]
   resources :borrowers, except: [:new, :edit]
   resources :authors, except: [:new, :edit]
   resources :books, except: [:new, :edit]

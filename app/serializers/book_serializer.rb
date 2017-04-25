@@ -5,11 +5,11 @@ class BookSerializer < ActiveModel::Serializer
 
   # belongs_to :author
   # side-loading a parent
-  def author
-    object.author.id
-  end
-
-  def borrowers
-    object.borrowers.pluck(:id)
-  end
+  # def author
+  #   object.author.id
+  # end
+  #
+  # def borrowers
+  #   object.borrowers.pluck(:id)
+  # end
 end

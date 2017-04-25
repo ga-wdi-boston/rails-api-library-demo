@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 class Loan < ApplicationRecord
-  belongs_to :borrower
-  belongs_to :book
+  belongs_to :borrower, inverse_of: :loans
+  belongs_to :book, inverse_of: :loans
 
   validates :borrower, presence: true
   validates :book, presence: true
