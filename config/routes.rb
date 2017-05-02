@@ -9,4 +9,8 @@ Rails.application.routes.draw do
   resources :examples, except: [:new, :edit]
   resources :books, except: [:new, :edit]
   resources :authors, except: [:new, :edit]
+  resources :borrowers, except: [:new, :edit]
+  resources :loans, except: [:new, :edit]
+
+
 end
